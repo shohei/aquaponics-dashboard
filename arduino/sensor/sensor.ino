@@ -16,6 +16,11 @@ std_msgs::String humid_msg;
 std_msgs::String moist_msg;
 std_msgs::String ph_msg;
 std_msgs::String ec_msg;
+char temp_char_array[10];
+char humid_char_array[10];
+char moist_char_array[10];
+char ph_char_array[10];
+char ec_char_array[10];
 ros::Publisher temperature("temperature", &temp_msg);
 ros::Publisher humidity("humidity", &humid_msg);
 ros::Publisher soil_moisture("soil_moisture", &moist_msg);
@@ -34,11 +39,17 @@ void setup()
 
 void loop()
 {
-  dtostrf(3.14, 8, 6, temp_msg.data);
-  dtostrf(3.14, 8, 6, humid_msg.data);
-  dtostrf(3.14, 8, 6, moist_msg.data);
-  dtostrf(3.14, 8, 6, ph_msg.data);
-  dtostrf(3.14, 8, 6, ec_msg.data);
+  dtostrf(3.14, 8, 6, temp_char_array);
+  dtostrf(3.14, 8, 6, humid_char_array);
+  dtostrf(3.14, 8, 6, moist_char_array);
+  dtostrf(3.14, 8, 6, ph_char_array);
+  dtostrf(3.14, 8, 6, ec_char_array);
+  temp_msg.data = temp_char_array;
+  humid_msg.data = humid_char_array;
+  moist_msg.data = moist_char_array;
+  ph_msg.data = ph_char_array;
+  ec_msg.data = ec_char_array;
+
   temperature.publish( &temp_msg);
   humidity.publish( &humid_msg);
   soil_moisture.publish( &moist_msg);
